@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ca">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>El Forn a Casa · Fes la teva caixa</title>
+  <meta name="description" content="Prepara la teva caixa regal amb productes del forn, fets a mà.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat+Brush&family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="cap">
+    <div class="marca">El Forn <span>a Casa</span></div>
+    <p class="lema">Fet a mà. Directe del forn.</p>
+  </header>
+
+  <main class="estada" id="estada">
+
+    <!-- Escena central: caixa + tapa -->
+    <section class="escena" aria-label="La teva caixa">
+      <div class="caixa" id="caixa">
+        <img class="caixa-img" src="assets/img/caixa.png" alt="Caixa buida amb separadors de cartró" draggable="false">
+        <div class="items" id="items"></div>
+      </div>
+      <div class="tapa" id="tapa">
+        <img src="assets/img/tapa.png" alt="Tapa de la caixa lligada amb rafia" draggable="false">
+        <button class="cta" id="comenca" type="button">Comença la teva comanda</button>
+      </div>
+    </section>
+
+    <!-- Safates de productes -->
+    <section class="safates is-bloquejat" id="safates" aria-label="Productes">
+      <h2>Fes-la teva.</h2>
+      <p class="ajuda">Toca un producte per posar-lo a la caixa. Torna'l a tocar per treure'l.</p>
+      <div class="safates-llista" id="llista"></div>
+    </section>
+
+    <!-- Tiquet -->
+    <aside class="tiquet" id="tiquet" aria-live="polite">
+      <div class="tiquet-cap">
+        <strong>El Forn <span>a Casa</span></strong>
+        <small>Comanda per emportar</small>
+      </div>
+      <h3>La teva caixa</h3>
+      <ul class="linies" id="linies"></ul>
+      <fieldset class="entrega">
+        <legend>Entrega</legend>
+        <label><input type="radio" name="entrega" value="recollida" checked> Recollida a la botiga <em>gratis</em></label>
+        <label><input type="radio" name="entrega" value="enviament"> Enviament a casa <em id="preu-enviament"></em></label>
+      </fieldset>
+      <div class="total"><span>Total</span><strong id="total">0,00 €</strong></div>
+      <button class="comanda" id="comanda" type="button" disabled>Fer la comanda</button>
+      <div class="barres" aria-hidden="true"></div>
+    </aside>
+
+    <!-- Guant de preparació (SVG) -->
+    <div class="guant" id="guant" aria-hidden="true">
+      <svg viewBox="0 0 200 250" width="100%" height="100%" overflow="visible">
+        <defs>
+          <linearGradient id="g-negre" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#43434c"/>
+            <stop offset=".55" stop-color="#16161a"/>
+            <stop offset="1" stop-color="#0a0a0c"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="100" cy="236" rx="78" ry="10" fill="#000" opacity=".18"/>
+        <g fill="url(#g-negre)" stroke="#050506" stroke-width="2">
+          <rect class="f" data-bx="50"  data-by="168" data-obert="-62" data-agafa="-24" x="36"  y="102" width="28" height="74"  rx="14"/>
+          <rect class="f" data-bx="66"  data-by="118" data-obert="-9"  data-agafa="18"  x="53"  y="36"  width="26" height="90"  rx="13"/>
+          <rect class="f" data-bx="96"  data-by="114" data-obert="-1"  data-agafa="6"   x="82"  y="20"  width="28" height="102" rx="14"/>
+          <rect class="f" data-bx="126" data-by="118" data-obert="7"   data-agafa="-8"  x="113" y="34"  width="26" height="92"  rx="13"/>
+          <rect class="f" data-bx="150" data-by="134" data-obert="17"  data-agafa="-16" x="139" y="72"  width="22" height="70"  rx="11"/>
+          <path d="M40 124 C40 102 62 98 100 98 C140 98 161 104 161 130 L158 192 C157 216 140 230 100 230 C60 230 44 216 42 192 Z"/>
+        </g>
+        <rect x="48" y="214" width="104" height="30" rx="10" fill="#2a2a31" stroke="#050506" stroke-width="2"/>
+        <g fill="#fff" opacity=".08">
+          <ellipse cx="82" cy="150" rx="22" ry="34" transform="rotate(-12 82 150)"/>
+          <ellipse cx="66" cy="62"  rx="5"  ry="26" transform="rotate(-9 66 62)"/>
+          <ellipse cx="96" cy="48"  rx="5"  ry="30"/>
+          <ellipse cx="126" cy="60" rx="5"  ry="26" transform="rotate(7 126 60)"/>
+        </g>
+      </svg>
+    </div>
+
+    <!-- Final -->
+    <div class="final" id="final" hidden>
+      <div class="final-targeta" role="dialog" aria-labelledby="final-titol">
+        <h2 id="final-titol">Gràcies!</h2>
+        <p id="final-text"></p>
+        <button class="comanda" id="reinicia" type="button">Preparar una altra caixa</button>
+      </div>
+    </div>
+  </main>
+
+  <div class="avis" id="avis" role="status"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
